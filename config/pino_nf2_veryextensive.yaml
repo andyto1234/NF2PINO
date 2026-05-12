@@ -23,7 +23,7 @@ data:
 
   # Closer to official NF2 than your smoke-test value of 400.
   # Full official-like would be 10000; 5000 is a sensible T4 compromise.
-  iterations: 5000
+  iterations: 2000
 
   random_config:
     batch_size: 16384
@@ -41,7 +41,7 @@ model:
 training:
   # Official example is closer to 15 epochs.
   # Keep this if you want closer-to-reference behavior.
-  epochs: 15
+  epochs: 5
 
   # Less frequent validation reduces overhead during longer training.
   validation_interval: 1000
