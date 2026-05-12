@@ -19,7 +19,7 @@ data:
 
   # Official NF2 examples tend to use more workers.
   # On Colab, 4 is a safer starting point than 8.
-  num_workers: 4
+  num_workers: 2
 
   # Closer to official NF2 than your smoke-test value of 400.
   # Full official-like would be 10000; 5000 is a sensible T4 compromise.
