@@ -1,0 +1,79 @@
+# --- Runtime & experiment outputs (regenerate on Colab / locally) ---
+runs/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-wheel-metadata/
+share/python-wheels/
+
+# --- Virtual environments ---
+.venv/
+venv/
+ENV/
+env/
+.env
+.env.*
+
+# --- Testing / coverage ---
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# --- ML / checkpoints (large); keep code & YAML only ---
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+wandb/
+
+# --- Data cubes (often huge); docs may reference paths only ---
+*.npz
+*.npy
+*.h5
+*.hdf5
+
+# --- Logs & local tooling ---
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- OS / editor ---
+Thumbs.db

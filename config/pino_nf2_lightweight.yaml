@@ -1,0 +1,48 @@
+---
+base_path: "runs/pino_nf2_hybrid/nf2"
+work_directory: "runs/pino_nf2_hybrid/work"
+logging:
+  mode: disabled
+data:
+  type: fits
+  slices:
+    - fits_path:
+        Br: "{%Br}"
+        Bt: "{%Bt}"
+        Bp: "{%Bp}"
+      load_map: false
+      bin: 4
+  z_range: [0, 40]
+  num_workers: 0
+  iterations: 200
+  random_config:
+    batch_size: 2048
+  validation_batch_size: 4096
+  log_shape: true
+model:
+  type: b
+  dim: 64
+  n_layers: 4
+training:
+  epochs: 2
+  accelerator: cpu
+  devices: 1
+  validation_interval: 100
+  loss_config:
+    - type: boundary
+      name: boundary
+      lambda: {start: 100.0, end: 10.0, iterations: 200}
+      ds_id: [boundary_01, potential]
+    - type: force_free
+      lambda: 0.1
+    - type: divergence
+      lambda: 0.1
+  pino_init:
+    steps: 8000
+    batch_size: 4096
+    max_samples: 40000
+    stride: [8, 8, 8]
+    lr: 0.003
+    strong_field_percentile: 90
+    strong_field_weight: 5.0
+    bottom_weight: 2.0
