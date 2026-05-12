@@ -55,9 +55,9 @@ training:
       # strongly respect the boundary early, then relax later so
       # force-free/divergence constraints can shape the coronal volume.
       lambda:
-        start: 1000.0
+        start: 100.0
         end: 1.0
-        iterations: 50000
+        iterations: 5000
 
       ds_id: [boundary_01, potential]
 
