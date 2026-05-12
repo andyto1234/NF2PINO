@@ -1,0 +1,81 @@
+---
+base_path: "runs/pino_nf2_hybrid/nf2_official_like"
+work_directory: "runs/pino_nf2_hybrid/work_official_like"
+
+logging:
+  mode: disabled
+
+data:
+  type: fits
+  slices:
+    - fits_path:
+        Br: "{%Br}"
+        Bt: "{%Bt}"
+        Bp: "{%Bp}"
+      load_map: false
+      bin: 4
+
+  z_range: [0, 40]
+
+  # Official NF2 examples tend to use more workers.
+  # On Colab, 4 is a safer starting point than 8.
+  num_workers: 4
+
+  # Closer to official NF2 than your smoke-test value of 400.
+  # Full official-like would be 10000; 5000 is a sensible T4 compromise.
+  iterations: 5000
+
+  random_config:
+    batch_size: 16384
+
+  validation_batch_size: 32768
+  log_shape: true
+
+model:
+  type: b
+
+  # Closer to official NF2 config than dim: 128.
+  dim: 256
+  n_layers: 6
+
+training:
+  # Official example is closer to 15 epochs.
+  # Keep this if you want closer-to-reference behavior.
+  epochs: 15
+
+  # Less frequent validation reduces overhead during longer training.
+  validation_interval: 1000
+
+  loss_config:
+    - type: boundary
+      name: boundary
+
+      # Your previous schedule was 300 -> 30 over 1200.
+      # This is closer in spirit to NF2's long decay:
+      # strongly respect the boundary early, then relax later so
+      # force-free/divergence constraints can shape the coronal volume.
+      lambda:
+        start: 1000.0
+        end: 1.0
+        iterations: 50000
+
+      ds_id: [boundary_01, potential]
+
+    - type: force_free
+      lambda: 0.1
+
+    - type: divergence
+      lambda: 0.1
+
+  pino_init:
+    # Keep your PINO initialization, but increase the batch size to use
+    # more of the T4 memory. If this OOMs, reduce to 16384.
+    steps: 8000
+    batch_size: 32768
+    max_samples: 120000
+    stride: [4, 4, 4]
+    lr: 0.0015
+
+    strong_field_percentile: 85
+    strong_field_weight: 10.0
+    bottom_weight: 5.0
