@@ -14,3 +14,7 @@
 **/Wiegelmann/relax1
 **/Wiegelmann/relax1_openmp
 *.bat
+
+# Colab / hybrid demo (override **/*.npy and **/*.pt above)
+!args.npy
+!best_model.pt

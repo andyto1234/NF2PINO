@@ -1,5 +1,17 @@
 # --- Runtime & experiment outputs (regenerate on Colab / locally) ---
-runs/
+# Ignore all run folders except the checked-in Colab demo cache (see bottom overrides).
+runs/*
+!runs/pino_nf2_notebook/
+runs/pino_nf2_notebook/*
+!runs/pino_nf2_notebook/cache/
+runs/pino_nf2_notebook/cache/*
+!runs/pino_nf2_notebook/cache/pino_extrapolation.npz
+!runs/pino_nf2_notebook/cache/sharp_jsoc_fits/
+runs/pino_nf2_notebook/cache/sharp_jsoc_fits/*
+!runs/pino_nf2_notebook/cache/sharp_jsoc_fits/Bp.fits
+!runs/pino_nf2_notebook/cache/sharp_jsoc_fits/Bt.fits
+!runs/pino_nf2_notebook/cache/sharp_jsoc_fits/Br.fits
+!runs/pino_nf2_notebook/cache/sharp_jsoc_fits/magnetogram.fits
 
 # --- Python ---
 __pycache__/
@@ -77,3 +89,8 @@ wandb/
 
 # --- OS / editor ---
 Thumbs.db
+
+# --- Overrides: versioned demo artifacts (must follow broader *.npz / *.pt rules) ---
+!runs/pino_nf2_notebook/cache/pino_extrapolation.npz
+!rtmag/args.npy
+!rtmag/best_model.pt
